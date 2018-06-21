@@ -1,0 +1,145 @@
+Imi cer scuze pentru lungimea readme-ului. Au fost niste probleme
+delicate si am considerat ca merita o explicatie pe masura.
+In special problema 2, cu ursii.
+
+
+* * * Problema 1 - frati
+    Abordarea este greedy.
+
+
+Concursurile sunt sortate de 2 ori, o data pentru jon, si altadata pentru sam.
+
+In principal, ele sunt sortate dupa suma (benzi + jocuri), pentru ca
+acestea pot aduce cel mai mare avantaj / pot aduce cel mai mare dezavantaj
+pentru oponent / pot fi o alegere stransa, care e numai bine sa fie aleasa.
+Singura diferenta intre cele 2 sortari este ca atunci cand suma este egala,
+pentru jon se va sorta in functie de jocuri, iar pentru sam se va sorta
+in functie de benzi.
+
+Dupa care, fiecare alege concursul preferat, daca acesta nu a fost luat inainte.
+
+Complexitatea: O(n log n).
+Aceasta complexitate vine de la faptu lca sortam vectorii dupa ce ii citim.
+Se mai face o parcurgere prin toate concursurile O(n). De asemenea, mai este
+si un while, pentru RemoveTaken, care nu consider ca influenteaza
+cu adevarat complexitatea pentru ca n-are cum sa ajunga la multe iteratii,
+datorita ca sortarile celor 2 vectori de preferinte sunt foarte asemanatoare.
+
+
+* * * Problema 2 - ursi
+    Abordarea este dinamica.
+
+Consideram o matrice care numara toate posibilitatile de zambete.
+
+Indicele coloanei in aceasta matrice reprezinta cate zambete "deschise" (precum
+parantezele) sunt in momentul actual.
+Initial, se incepe cu un zambet deschis, la primul caracter
+Valoarea de unde exista zambete deschise este numarul "zambetelor" posibile
+la momentul actual.
+
+Exemplu: incepem cu primul caracter. Consideram inputul "^^^^"
+
+Pas 1: aceasta coloana reprezinta zambetele deschise pentru caracterul 1
+(un zambet deschis) (o posibilitate)
+
+0
+0
+1
+0
+
+Pas 2: cu al 2lea ochi citit, se putea ori inchide primul zambet citit, ori
+sa deschidem inca un zambet posibil. 
+Deci acum avem 2 "timeline-uri". unul pentru cel de jos, si unul pentru cel de
+sus
+
+0 0
+0 1
+1 0
+0 1
+
+Pas 3: Primul "timeline" este obligat sa-si inchida paranteza (pentru ca este la
+al 3lea ochi citit, din 4. deci suntem obligati doar sa inchidem paranteze de acum
+(n-are rost sa mai deschidem paranteze ca nu avem alti ochi ca sa inchidem tot 
+ce avem deschis)).
+Aceasta inchidere de paranteze aduce +2 posibilitati pentru ca poate sa inchida
+una dintre cele 2 paranteze deschise initial.
+Al 2lea "timeline" poate doar sa deschida inca una, deci +1 la numarul total
+de posibilitati cu o singura paranteza deschisa la al 3lea caracter
+
+0 0 0
+0 1 0
+1 0 3
+0 1 0
+
+Pas 4: Se inchide paranteza ramasa deschisa in toate cele 3 posibilitati
+
+0 0 0 0
+0 1 0 0
+1 0 3 0
+0 1 0 3
+
+Caracterul "_" se poate pune la oricare dintre parantezele deschise in momentul
+actual, deci el va inmulti posibilitatile existente momentan cu numarul de paranteze
+deschise momentan.
+
+Complexitatea: O(n ^ 2)
+Parcurgem o matrice.
+
+
+* * * Problema 3 - planificare
+    Abordarea este dinamica.
+
+Se calculeaza, pentru fiecare proba, numerele "pierderea minim posibila" si
+"numarul de concursuri folosite pentru a obtine aceasta pierdere", iar
+rezultatul se afla in ultima proba.
+
+Pentru fiecare proba se calculeaza timpul liber daca ar fi singura proba
+dintr-un concurs. Dupa care, se cauta la probele anterioare, sa vedem
+daca putem obtine un rezultat mai bun in cazul in care bagam inca o proba.
+Daca este loc in timpul liber pentru a baga proba anterioara, analizam
+daca rezultatul pe care l-am obtine prin bagarea acestei probe in
+acelasi concurs este mai bun decat ce avem la momentul de fata.
+
+Complexitatea: O(n ^ 2).
+Se poate ajunge la cazul in care intr-o iteratie
+se verifica tot ce era anterior, daca durata unui concurs este foarte mare
+si se pot baga toate probele anterioare. (putin probabil totusi)
+
+
+* * * Problema 4 - numaratoare
+    Abordarea este recursiva (?).
+
+
+Urmeaza 2 fragmente cu istoria prin care am ajuns la functia potrivita:
+
+**************
+Initial, am incercat sa creez un backtracking foarte explicit, cu multe ifuri,
+dar nu s-a putut sa trec limita de timp, totusi mi-a oferit un exemplu bun,
+la cum trebuiau sa arate iteratiile, incrementarea unei solutii.
+
+Dupa, am incercat ceva dinamic, folosind o structura de genul
+vector< pair <int, int> >, care era de forma "(termen, de cate ori se repeta)",
+dar am esuat in dificultatea incrementarii unei solutii. Totusi, facand asta,
+am reusit sa inteleg mai bine cum ar trebui sa mearga dinamica in creier, si,
+astfel, am reusit sa scriu functia care e utilizata acum.
+**************
+
+Mai intai, se cauta maximul pe care il poate avea un termen (un termen
+care poate fi urmat doar de 1, pentru a umple restul termenilor cu 1).
+Mergem de la acest maxim pana la un minim care permite existenta
+a unui numar de termeni necesar (suma pe care o mai avem de umplut / numarul
+de termeni care mai trebuie sa existe).
+Dupa, se repeta aceasta logica pentru fiecare termen, si se creeaza
+vectorul de termeni in mod corect, oprindu-se cand a gasit solutia
+de la indexul cerut.
+
+Nu sunt sigur ce fel de abordare este. Greedy sigur nu e. As considera-o
+dinamica pentru ca mereu ma folosesc de rezultatul anterior pentru
+a crea un rezultat nou.
+
+Complexitatea: nu stiu sincer...
+Mi se pare ca recursivitatea imparte problema in mai multe subprobleme, iar
+acesetea, la randul lor, se impart mai mai multe subprobleme (dar mai putine
+decat s-au impartit initial)
+
+Codreanu Bogdan - 322CA
