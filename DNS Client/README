@@ -1,0 +1,8 @@
+Clientul foloseste socket UDP
+
+Functia de citire a unui data label functioneaza recursiv, pentru cand se gaseste o adresa in el.
+
+Nu am facut nicio implementare pentru Authoritative Servers sau Additional records.
+Un mesaj de la un server dns este considerat valid atunci cand are cel putin un answer.
+
+Codreanu Bogdan, 322CA
