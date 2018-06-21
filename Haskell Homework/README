@@ -1,0 +1,47 @@
+Am facut tema pana in stadiul lucrului cu "Search".
+
+Obiectele sunt de 3 tipuri, patrat, cerc, sageata.
+Un nivel este un map cu (key = pozitii) si (val = (maybe object, maybe object)),
+unde obiectul din stanga este un posibil patrat, iar cel din dreapta este o posibila
+sageata / un cerc.
+
+Pentru show level se genereaza toate pozitiile posibile (de la extremele pozitiilor existente)
+si se afiseaza corespunzator valorile.
+
+La move, mai intai se scoate patratul respectiv din nivel, dupa care se incearca sa fie pus in pozitia viitoare.
+Daca este alt patrat pe pozitia aia, atunci se face un apel recursiv care misca si acest patrat.
+Dupa ce se termina aceasta recursivitate, in sfarsit se poate aseza patratul nostru la pozitia dorita.
+
+Functiile successors si isGoal sunt destul de asemanatoare, in sensul ca ambele itereaza prin toate
+valorile din nivel, verifica care au un patrat si, in cazul successors, se pun nivelele create in urma
+aplicarii move pe aceste patrate intr-o lista, iar in cazul isGoal, daca un patrat nu este pe aceiasi pozitie
+cu un cerc de aceiasi culoare atunci returneaza fals.
+
+
+***
+Feedback tema:
+
+Mi s-a parut destul de interesanta tema si chiar mi-a placut sa lucrez cu toate pattern matching-urile astea.
+E un concept nou, si chiar placut odata ce iti intri in mana.
+DAR, dificultatea principala a temei a fost din cauza limbajului nou. Lipsa de exemple pe internet sau a unei documentatii
+mai bune a facut ca studierea anumitor concepte de baza sa fie un chin. Ca sa fiu sincer, 70% din timpul pentru tema
+a fost investit in a ma prinde cum se scrie un constructor, ce este un Data, eq, Ord, ce o clasa si cum adica sa suprascriu functii.
+de ce implementarea problemState nu este in fisierul problemState in "corpul" clasei, si multe intrebari de genul.
+Iar decizia de a nu mai face nimic in Search este datorata chinului pe care l-am avut incercand sa inteleg 
+ce cum poti sa scrii un constructor la data care e de fapt generic? Am incercat sa scriu ceva, desi la limitedDfs nu reuseam
+sa testez nimic separat in consola, ca sa imi formez logica pentur ca nu reuseam sa.. fac legatura din toata genericitatea asta cu
+ce am implementat anterior, de exemplu la limitedDfs: am un paramentru "s" comentat cu "starea initiala". Stare initiala... deci..
+presupun ca ProblemState. ? dar de ce ar fi s-ul ca tip generic o linie mai sus la un ProblemState... adica.. ce inseamna "headerul" asta..
+
+Nu ma plang de faptul ca ar fi fost cerinta temei urata, sau scheletul de cod eronat, ci ma plang ca documentatia
+de pe internet este foarte slaba pentru haskell si mi-a fost foarte greu sa ma prind de lucrurile de baza ale scrierii in haskell.
+Pana si "instalarea" a fost un chin. Imi aparea pe linux eroarea de Stack "AesonException "Invalid flag name: \"bytestring--lt-0_10_4\"""
+care, atunci cand o cautam pe net, s-a dovedit a fi o pacoste foarte mare..
+
+Overall, conceptul de pattern matching cam peste tot prin cod mi s-a parut putin fascinant si mi-a placut mult de tot partea de 
+scris cod (dupa ce am inteles logica prin care ar trebui scris chestiile de baza), dar sa scriu haskell a fost o experienta
+foarte urata. A fost extrem de neintuitiv si de greu de intrat in mana. 
+
+Am scris acest feedback din furie catre limbaj, in niciun caz din furie catre tema sau catre materie.
+
+- Codreanu Bogdan
